@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { router } from 'expo-router';
-import { getRetosOnce, Player } from '../services/retosService';
+import { getRetosOnce, Player } from '../services/jugadoresService';
 
 export default function InicioScreen() {
   const [players, setPlayers] = useState<Player[]>([]);

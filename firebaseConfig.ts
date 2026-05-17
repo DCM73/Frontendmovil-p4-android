@@ -2,7 +2,7 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
-// 🔥 Config del proyecto CORRECTO (recibiendo-notificaciones-push)
+
 const firebaseConfig = {
   apiKey: "AIzaSyANf-7OFSpCKXn2n87sXpl136m0607h2Io",
   authDomain: "recibiendo-notificaciones-push.firebaseapp.com",
@@ -21,14 +21,13 @@ if (!getApps().length) {
   app = getApp();
 }
 
-// ✅ Export DB
+
 export const db = getDatabase(app);
 
-// ✅ Logs de verificación (muy útiles mientras solucionas el cambio)
+
 console.log("🔥 Firebase projectId (config):", app.options.projectId);
 console.log("🔥 Firebase databaseURL (config):", app.options.databaseURL);
 
-// ✅ “Guardrail”: si estás apuntando al proyecto equivocado, lo grita
 if (app.options.projectId !== "recibiendo-notificaciones-push") {
   console.warn(
     "⚠️ OJO: Estás inicializando Firebase con un proyecto inesperado:",

@@ -1,4 +1,4 @@
-// services/retosService.ts
+
 import { get, ref } from 'firebase/database';
 import { getApp } from 'firebase/app';
 import { db } from '../firebaseConfig';
@@ -14,10 +14,10 @@ export type Player = {
   videoUrl: string;
 };
 
-export const getRetosOnce = async (): Promise<Player[]> => {
+export const getjugadoresOnce = async (): Promise<Player[]> => {
   console.log('➡️ Llamando a Firebase ruta "jugadores/jugadores" ...');
 
-  // ✅ Prueba definitiva: ¿a qué proyecto/DB está apuntando ESTA lectura?
+
   const app = getApp();
   console.log('🔥 Firebase projectId:', app.options.projectId);
   console.log('🔥 Firebase databaseURL:', app.options.databaseURL);
