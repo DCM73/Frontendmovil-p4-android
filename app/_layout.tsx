@@ -1,24 +1,28 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { TouchableOpacity, Text } from 'react-native';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
+export default function LayoutPrincipal() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack // stack para volver atrás entre pantlalas, se pone una encima de la otra
+      screenOptions={{
+        headerStyle: { backgroundColor: '#1E293B' },
+        headerTintColor: '#FFFFFF',
+        headerTitleStyle: { fontWeight: 'bold' },
+        headerTitleAlign: 'center',
+
+        headerRight: () => (
+          <TouchableOpacity 
+            onPress={() => router.replace('/')} // para ir al inicio limpio
+            style={{ padding: 5 }}
+          >
+            <Text style={{ color: '#3B82F6', fontWeight: 'bold', fontSize: 16 }}>Inicio</Text>
+          </TouchableOpacity>
+        ),
+      }}
+    >
+      <Stack.Screen name="index" options={{ title: 'Jugadores Disponibles' }} />
+      <Stack.Screen name="detalle" options={{ title: 'Detalle del Jugador' }} />
+      <Stack.Screen name="multimedia" options={{ title: 'Reproductor Multimedia' }} />
+    </Stack>
   );
 }
