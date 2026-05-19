@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { router } from 'expo-router';
-import { getRetosOnce, Player } from '../services/jugadoresService';
+import { getjugadoresOnce, Player } from '../services/jugadoresService';
 
 export default function InicioScreen() {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -17,7 +17,7 @@ export default function InicioScreen() {
   useEffect(() => {
     const cargarDatos = async () => {
       try {
-        const lista = await getRetosOnce();
+        const lista = await getjugadoresOnce();
         setPlayers(lista);
       } catch (error) {
         console.log('❌ Error cargando jugadores desde Firebase:', error);
