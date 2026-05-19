@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "155949175729",
+    "project_id": "equipobasketedu",
+    "storage_bucket": "equipobasketedu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155949175729:android:41af96023b59455d906390",
+        "android_client_info": {
+          "package_name": "com.edu.equipobasket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYQb5-SjTClt7LDghRAz1rHZNTSeQLQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

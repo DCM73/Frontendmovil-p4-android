@@ -1,7 +1,55 @@
-import { Stack } from 'expo-router';
-import { TouchableOpacity, Text } from 'react-native';
+import { Stack, router } from 'expo-router';
+import { TouchableOpacity, Text, Alert } from 'react-native';
+import { useEffect } from 'react';
+
+// nuevo modular api
+import {
+  getMessaging,
+  requestPermission,
+  getToken,
+  onMessage,
+  setBackgroundMessageHandler,
+  AuthorizationStatus,
+  subscribeToTopic
+} from '@react-native-firebase/messaging';
+
+// manejo de notis en segundo plano
+setBackgroundMessageHandler(getMessaging(), async remoteMessage => {
+  console.log('Nottificación en segundo plano', remoteMessage);
+});
 
 export default function LayoutPrincipal() {
+  useEffect(() => {
+      // pedir permiso al usuario para recibir notis
+      const solicitarPermisos = async () => {
+        const authStatus = await requestPermission(getMessaging());
+              const enabled =
+                authStatus === AuthorizationStatus.AUTHORIZED ||
+                authStatus === AuthorizationStatus.PROVISIONAL;
+
+              if (enabled) {
+                console.log('Permiso de notificaciones concedido (API Moderna).');
+                const token = await getToken(getMessaging());
+                console.log('FCM TOKEN:', token);
+
+                await subscribeToTopic(getMessaging(), "todos"); // conx móvil
+                console.log('Suscrito con éxito al canal global');
+              }
+      };
+
+      solicitarPermisos();
+
+      // manejo de notis en primer plano
+      const unsubscribe = onMessage(getMessaging(), async remoteMessage => {
+            Alert.alert(
+              remoteMessage.notification?.title || 'Nueva Notificación',
+              remoteMessage.notification?.body || 'Tienes un nuevo mensaje de Equipo Basket'
+            );
+        });
+
+      return unsubscribe;
+    }, []);
+
   return (
     <Stack // stack para volver atrás entre pantlalas, se pone una encima de la otra
       screenOptions={{
